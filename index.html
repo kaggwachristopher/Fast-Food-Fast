@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" >
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/menu.css" />
+    <link rel="stylesheet" type="text/css" href="css/account.css" />
+
+</head>
+<body>
+   
+
+           
+           <div class="tab">
+  <button class="tablinks" id="tab1" onclick="tabbed_menu(event, 'account')">Account</button>             
+  <button class="tablinks" id="tab2"onclick="tabbed_menu(event, 'recent')">Recent orders</button>
+  <button class="tablinks" id="tab3" onclick="tabbed_menu(event, 'menu')">Menu</button>
+  
+
+  <h3 id="heading">Fast Food Fast</h3>
+</div>
+<div class="main">
+<div id="menu" class="tabcontent">
+  <div class="top_bar">
+    <a id="top_header">Our menu for today</a>
+  </div> 
+
+  <div class="list_item">
+    <img  src="css/images/chips.png"  id="pic">
+    <span id="dish_description">Plain Chips With Ketchup</span>
+    <a id="price_tag">@9000UGX</a>
+    <button class="order_button" onclick="order()">Order</button>
+  </div>
+  
+  <div class="list_item">
+    <img  src="css/images/chips.png"  id="pic">
+    <span id="dish_description">Plain Chips With Ketchup</span>
+    <a id="price_tag">@9000UGX</a>
+    <button class="order_button" onclick="order()">Order</button>
+  </div>
+  <div class="list_item">
+    <img  src="css/images/chips.png"  id="pic">
+    <span id="dish_description">Plain Chips With Ketchup</span>
+    <a id="price_tag">@9000UGX</a>
+    <button class="order_button" onclick="order()">Order</button>
+  </div>
+  <div class="list_item">
+    <img  src="css/images/chips.png"  id="pic">
+    <span id="dish_description">Plain Chips With Ketchup</span>
+    <a id="price_tag">@9000UGX</a>
+    <button class="order_button" onclick="order()">Order</button>
+  </div>
+  <div class="list_item">
+    <img  src="css/images/chips.png"  id="pic">
+    <span id="dish_description">Plain Chips With Ketchup</span>
+    <a id="price_tag">@9000UGX</a>
+    <button class="order_button" onclick="order()">Order</button>
+  </div>
+  <div class="list_item">
+    <img  src="css/images/chips.png"  id="pic">
+    <span id="dish_description">Plain Chips With Ketchup</span>
+    <a id="price_tag">@9000UGX</a>
+    <button class="order_button" onclick="order()">Order</button>
+  </div>
+  <div class="list_item">
+    <img  src="css/images/chips.png"  id="pic">
+    <span id="dish_description">Plain Chips With Ketchup</span>
+    <a id="price_tag">@9000UGX</a>
+    <button class="order_button" onclick="order()">Order</button>
+  </div>
+</div>
+
+<div id="recent" class="tabcontent">
+    <div class="top_bar">
+        <a id="top_header">You previously ordered for these...</a>
+      </div> 
+
+  <div class="list_item">
+    <img  src="css/images/chips.png"  id="pic">
+    <span id="dish_description">Plain Chips With Ketchup</span>
+    <a id="price_tag">@9000UGX</a>
+  </div>
+  <div class="list_item">
+    <img  src="css/images/chips.png"  id="pic">
+    <span id="dish_description">Plain Chips With Ketchup</span>
+    <a id="price_tag">@9000UGX</a>
+  </div>
+  <div class="list_item">
+    <img  src="css/images/chips.png"  id="pic">
+    <span id="dish_description">Plain Chips With Ketchup</span>
+    <a id="price_tag">@9000UGX</a>
+  </div>
+  <div class="list_item">
+    <img  src="css/images/chips.png"  id="pic">
+    <span id="dish_description">Plain Chips With Ketchup</span>
+    <a id="price_tag">@9000UGX</a>
+    <button class="order_button" onclick="order()">Order</button>
+  </div>
+  <div class="list_item">
+    <img  src="css/images/chips.png"  id="pic">
+    <span id="dish_description">Plain Chips With Ketchup</span>
+    <a id="price_tag">@9000UGX</a>
+  </div>
+  <div class="list_item">
+    <img  src="css/images/chips.png"  id="pic">
+    <span id="dish_description">Plain Chips With Ketchup</span>
+    <a id="price_tag">@9000UGX</a>
+  </div>
+  <div class="list_item">
+    <img  src="css/images/chips.png"  id="pic">
+    <span id="dish_description">Plain Chips With Ketchup</span>
+    <a id="price_tag">@9000UGX</a>
+  </div> 
+</div>
+
+<div id="account" class="tabcontent">
+  <div id="pic_section">
+  <img id="profile_pic" src="css/images/avatar.png"/>
+  <h3 id="full_name">Christopher Kaggwa</h3>
+  <h4 id="location">Kawempe</h4>
+</div>
+
+<div class="user_profile">
+    <div class="user_details">
+      <h5 id="email_label">Email</h5>
+      <h5 id="email_address">chrisduke.999@gmail.com</h5>
+    </div>
+    <div class="user_details">
+        <h5 id="phone_label">Mobile</h5>
+        <h5 id="phone">+256755128879</h5>
+      </div>
+</div>
+<div class="personal_comments">
+  <h3 id="orders">Orders placed</h3>
+  <h3 id="order_number">0</h3>
+  <h3 id="average">Average per week</h3>
+  <h3 id="average_number">0</h3>
+  <div id="logout_button"><a id="logout" href="welcome.html">LOGOUT..</a></div>
+  </div>
+</div>
+    <script src="js/tab.js" ></script>
+</body>
+
+
+</html>
