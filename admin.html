@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin</title>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+    <div id="admin_heading">ADMINISTRATORS HOUSE</div>
+    <span class="menu_items">
+        <h5 id="menu_head">Menu items</h5>
+        <ol>
+        <li class="menu_list" ><span id="food"> pizza</span><input class="menu_list" type="button" id="edit" value="Edit menu item">
+           <input class="menu_list" type="button" onclick="return button_status(this)" id="add" value="Add to menu">
+        </li>
+        <li class="menu_list"><span id="food">Rolex</span> <input class="menu_list" type="button" id="edit" value="Edit menu item">
+            <input class="menu_list" type="button" onclick="return button_status(this)" id="add" value="Add to menu">
+         </li>
+         <li class="menu_list"><span id="food">Kebab</span> <input class="menu_list" type="button" id="edit" value="Edit menu item">
+            <input class="menu_list" type="button"  onclick="return button_status(this)" id="add" value="Add to menu">
+         </li>
+         <li class="menu_list"><span id="food">Hot Dog</span> <input class="menu_list" type="button" id="edit" value="Edit menu item">
+            <input class="menu_list" type="button"  onclick="return button_status(this)" id="add" value="Add to menu">
+         </li>
+         <li class="menu_list"><span id="food">Chips and Ketchup</span> <input class="menu_list" type="button" id="edit" value="Edit menu item">
+            <input class="menu_list" type="button"  onclick="return button_status(this)" id="add" value="Add to menu">
+         </li>
+        </ol>
+        <div id="add_items">
+            <table id="add_item">
+                <tr><td> Add to menu</td></tr>
+                <tr><td id="new_image"><img src="css/images/oranges.jpg
+                    " alt="image not found"></td></tr>
+                <tr><td ><input type="text" id="new_name" placeholder="Recipe name" required></td></tr>
+                <tr><td><input type="text" id="new_price" placeholder="Price" required> </td></tr>
+                <tr><td><input type="submit" id="new_button" value="Add to menu"></td></tr>
+            </table>
+        </div>
+    </span>
+    <span class="order_table">
+        <h5 id="table_head">Orders</h5>
+        <table id="orders" border="1.5">
+            <tr>
+                <td class="id_column">User Id</td>
+                <td class="food_column">Food</td>
+                <td class="quantity_column">Quantity</td>
+                <td class="status_column">Order status</td>
+            </tr>
+            <tr id="ordered_item">
+                <td class="id_column">3214</td>
+                <td class="food_column">Fried fish</td>
+                <td class="quantity_column">8</td>
+                <td class="status_column">
+                    <input type="button" onclick="button_status(this)" id="accept" value="Accept">
+                    <input type="button" onclick="button_status(this)" id="decline" value="Decline">
+                </td>
+            </tr>
+        </table>
+    </span>    
+
+        <script src="js/tab.js"></script>
+</body>
+</html>
