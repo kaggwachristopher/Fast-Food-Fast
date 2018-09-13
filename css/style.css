@@ -1,25 +1,25 @@
 body#welcome{
     background-image: url(images/pizza.jpeg);
-    position: fixed;
     width:  100%;
-    height:  100%;
+    background-size:cover;
+    height: fit-content;
     }
 #main_text{
-    font-size: 200px;
+    font-size: 60px;
     color: rgba(212, 173, 27, 0.98);
     font-weight: 900;
     border-radius: 37px;
     padding: 10px;
     font-family: Kristen ITC;
-    /* text-align:  center; */
     background-color: #04040487;
     margin-top: 32%;
     margin-bottom: 179px;
 }       
 #get_started{
-    width: 40%;
+    width: fit-content;
     height:;
-    font-size: 91px;
+    margin-left: 10px;
+    font-size: 30px;
     font-weight:  bold;
     border:  solid;
     border-radius: 65px;
@@ -27,14 +27,12 @@ body#welcome{
 }
 #continue_button{
     text-align: center;
-    width: 100%;
     margin-top: 11%;
-    /* margin-bottom: -104px; */
 }
 .main{
     text-align: center;
     height:  fit-content;
 }
 #text{
-    margin-top: 414px;
+    margin-top: 16%;
 }       

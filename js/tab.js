@@ -48,6 +48,22 @@ function order(){
     order=document.getElementsByClassName("order_button");
     alert("Your order has been recieved and is pending acceptance, Thank you again");
 }
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+
+
+
 var table=document.getElementById("orders")
 var item=document.getElementById("ordered_item");
 var x=1;

@@ -16,8 +16,10 @@ body{
 }
 .tab {
     overflow: hidden;
-    background-color: #689463;
+    background-color: #ffffff;
     align-items:  stretch;
+    border-top: solid;
+    border-bottom: solid;
 }
 .tab button {
     background-color: inherit;
@@ -29,9 +31,6 @@ body{
     transition: 0.7s;
     font-size: 17px;
     width: fit-content;
-}
-.tablinks{
-
 }
 .tab button:hover {
     background-color: rgba(221, 221, 221, 0.822);
@@ -49,22 +48,20 @@ body{
     background-image: url("images/hotdog.jpg");
     height: 100%;
     background-size: cover;
-
 }
-
 .list_item{
     background-color: #7b727a91;
-    }
-    #price_tag{
-        text-decoration: none;
-        border-radius: 10px;
-        color: white;
-        font-size: 27px;
-        font-family: pioret one, cursive;
-        margin-right: 36px;
-        margin-left: 63px;
-        background: -webkit-linear-gradient(top,#ffb8b8,#3c2804);
-    }
+}
+#price_tag{
+    text-decoration: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 27px;
+    font-family: pioret one, cursive;
+    margin-right: 36px;
+    margin-left: 63px;
+    background: -webkit-linear-gradient(top,#ffb8b8,#3c2804);
+}
     
 .main{
     height: fit-content;
