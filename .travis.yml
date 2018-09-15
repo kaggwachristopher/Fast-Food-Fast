@@ -1,3 +1,7 @@
 language: python
 python:
     - "3.7"
+install:
+  - pip install -r python/01/requirements.txt
+script:
+  - cd python/01 && pytest
