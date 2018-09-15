@@ -6,4 +6,4 @@ install:
   - pip install coveralls
   - pip install -r requirements.txt
 script: 
-  - app.py  
+  - run.py  
