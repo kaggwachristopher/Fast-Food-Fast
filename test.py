@@ -1,16 +1,24 @@
 import unittest
+from app.models import RecipeOrders
+from instance.config import TestingConfig
 
 
-class Api(unittest.TestCase):
+class BaseCase(unittest.TestCase):
 
     def setUp(self):
-        pass
+        self.app = create_app(TestingConfig)
+        self.client = self.app.test_client()
+        self.order={
+
+        }
+
 
     def tearDown(self):
         pass
 
     def test_all_orders_getter(self):
-        pass
+        self.assertEqual(2, 2)
+
 
     def test_single_order_getter(self):
         pass
