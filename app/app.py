@@ -1,8 +1,9 @@
-from flask import Flask, jsonify, request, json
+from flask import jsonify, request, json
 import datetime
 import random
 
-app = Flask('__name__')
+if __name__ == '__main__':
+    import app
 
 all_orders_list = []
 
