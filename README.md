@@ -7,4 +7,4 @@ A food delivery application
  
 [![Coverage Status](https://coveralls.io/repos/github/kaggwachristopher/Fast-Food-Fast/badge.svg?branch=api)](https://coveralls.io/github/kaggwachristopher/Fast-Food-Fast?branch=api)
 
-[![Maintainability](https://api..com/v1//a99a88d28ad37a79dbf6/maintainability)](https://.com/github///maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/7e866f55b4e3f8e28a17/maintainability)](https://codeclimate.com/github/kaggwachristopher/Fast-Food-Fast/maintainability)
