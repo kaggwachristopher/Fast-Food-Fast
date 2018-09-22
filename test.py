@@ -1,22 +1,22 @@
 import unittest
 from app.models import RecipeOrders
-from app import Environment
+#from app import Environment
 from instance.config import TestingConfig
 
-env = Environment()
+#env = Environment()
 
-class BaseCase(unittest.TestCase):
+class Testing(unittest.TestCase):
 
-    def setUp(self):
-        self.app = env.create_app(TestingConfig)
-        self.order = {
-                        "order_date": "2018-09-22 02:36:27.956913",
-                        "order_id": 3,
-                        "order_status": "Pending",
-                        "quantity": "5",
-                        "recipe_id": "4",
-                        "user_id": "21"
-                     }
+    # def setUp(self):
+    #     self.app = env.create_app(TestingConfig)
+    #     self.order = {
+    #                     "order_date": "2018-09-22 02:36:27.956913",
+    #                     "order_id": 3,
+    #                     "order_status": "Pending",
+    #                     "quantity": "5",
+    #                     "recipe_id": "4",
+    #                     "user_id": "21"
+    #                  }
 
 
     # def tearDown(self):
