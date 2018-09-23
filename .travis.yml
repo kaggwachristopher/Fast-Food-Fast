@@ -8,6 +8,7 @@ script:
   - pytest --cov=app test.py
   - coverage
   - coveralls
+  - codeclimate-test-reporter
 after_success:
   - coveralls
   - codeclimate-test-reporter
