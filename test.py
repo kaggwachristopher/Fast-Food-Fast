@@ -1,11 +1,6 @@
 import unittest
-from app.models import RecipeOrders
 from app.app import app
 from flask import json
-# from app import Environment
-from instance.config import TestingConfig
-
-tester = RecipeOrders()
 
 
 class Testing(unittest.TestCase):
@@ -21,10 +16,10 @@ class Testing(unittest.TestCase):
             "recipe_id": "4",
             "user_id": "21"
         }
-        self.update={
+        self.update = {
             "status_id": 2
         }
-        self.update1={
+        self.update1 = {
             "status_id": 7
         }
 
@@ -47,11 +42,13 @@ class Testing(unittest.TestCase):
         result = self.client().put('/api/v1/orders/3', content_type='application/json',
                                    data=json.dumps(self.update))
         self.assertEqual(result.status_code, 201)
+        self.assertIsNotNone(result)
 
     def test_invalid_update(self):
         result = self.client().put('/api/v1/orders/4', content_type='application/json',
                                    data=json.dumps(self.update))
         self.assertEqual(result.status_code, 404)
+        self.assertIsNotNone(result)
 
     def test_invalid_status_id(self):
         result = self.client().put('/api/v1/orders/3', content_type='application/json',
@@ -60,5 +57,5 @@ class Testing(unittest.TestCase):
 
     def test_place_order(self):
         result = self.client().post('/api/v1/orders', content_type='application/json',
-                                        data=json.dumps(self.order))
+                                    data=json.dumps(self.order))
         self.assertEqual(result.status_code, 201)
