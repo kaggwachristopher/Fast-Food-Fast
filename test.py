@@ -11,7 +11,7 @@ tester = RecipeOrders()
 class Testing(unittest.TestCase):
 
     def setUp(self):
-        self.api = app()
+        self.api = app
         self.client = self.api.test_client
         self.order = {
             "order_date": "2018-09-22 02:36:27.956913",
@@ -57,7 +57,6 @@ class Testing(unittest.TestCase):
         result = self.client().put('/api/v1/orders/3', content_type='application/json',
                                    data=json.dumps(self.update1))
         self.assertEqual(result.status_code, 403)
-
 
     def test_place_order(self):
         result = self.client().post('/api/v1/orders', content_type='application/json',
