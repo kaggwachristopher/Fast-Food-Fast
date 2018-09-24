@@ -38,7 +38,7 @@ h5#email_label,#phone_label{
     font-size: 33px;
     color: aliceblue;
     margin-bottom: 11px;
-    font-family: Lucida Handwriting;
+    font-family: cursive;
 }
 h5#email_address,#phone{
     font-size: 177%;
@@ -51,7 +51,7 @@ h3#orders,#average{
 font-size: 26px;
 color: #58895a;
 margin-left:  32px;
-font-family: stencil;
+font-family: cursive;
 }
 h3#order_number,#average_number{
     font-size: 90px;

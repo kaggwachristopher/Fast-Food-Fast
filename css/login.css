@@ -3,7 +3,7 @@ html, body{
 	width: 100%;
 	padding: 0px;
 	margin: 0px;
-	background-image: url(images/hotdog.jpg);
+	background-image: url(../images/chips.png);
 	background-size: cover;
 	background-attachment: fixed;
 }
@@ -17,7 +17,7 @@ html, body{
 	width: 81%;
 }
 #landing_note{
-     color: white;
+    color: white;
 	font-family: vivaldi;
 	display:  block;
 	font-size: 45px;

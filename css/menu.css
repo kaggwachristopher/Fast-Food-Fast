@@ -10,8 +10,8 @@
 }
 
 #menu.tabcontent{
-    background-image: url("images/pizza.jpeg");
-    background-position: fixed;
+	background-color: black;
+	background-position: fixed;
 	background-size: cover;
 	}
 
