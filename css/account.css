@@ -1,6 +1,6 @@
 #account.tabcontent{
     height: fit-content;
-    background-color: aliceblue;
+    background-color: white;
 }
 #profile_pic{
     height:250px;
@@ -11,7 +11,8 @@
 }
 #pic_section{
     text-align: center;
-    background-color: aliceblue;
+    color:  white;
+    background-color: #464145;
 }
 h3#full_name{
     font-size: 30px;
@@ -32,7 +33,7 @@ h4#location{
    margin-top: 4px;
    height:  fit-content;
    border-radius: 6px;
-   background-color: brown;
+   background-color: black;
 }
 h5#email_label,#phone_label{
     font-size: 33px;
@@ -47,18 +48,13 @@ h5#email_address,#phone{
     text-align:  center;
     padding: 2.5%;
 }
-h3#orders,#average{
-font-size: 26px;
-color: #58895a;
-margin-left:  32px;
-font-family: cursive;
-}
+h3#orders,#average{font-size: 26px;color: white;margin-left:  32px;font-family: cursive;}
 h3#order_number,#average_number{
     font-size: 90px;
     color: black;
     border-radius: 5px;
     width:  fit-content;
-    background-color: #479e65d1;
+    background-color: white;
     margin-left: 35px;
 }
 #logout{
@@ -68,8 +64,8 @@ h3#order_number,#average_number{
     border:  solid;
     border-radius: 11px;
     margin-bottom: -31px;
-    color: brown;
-    background-color: #0a0513;
+    color: white;
+    background-color: black;
 }
 #logout_button{
     width: 100%;
