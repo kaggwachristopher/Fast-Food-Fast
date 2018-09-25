@@ -10,8 +10,8 @@ html {
 body{
     width: 100%;
     height: fit-content;
-    font-family: Arial;
-    background-image: url("images/chips.png");
+    font-family: cursive;
+    background-image: url("../images/pizza.jpeg");
     background-size: cover;
 }
 .tab {
@@ -40,12 +40,11 @@ body{
 }
 .tabcontent {
     display: none;
-    
     border-top: none;
     width: 100%;
 }
 #recent.tabcontent{
-    background-image: url("images/hotdog.jpg");
+    background-color: black;
     height: 100%;
     background-size: cover;
 }
@@ -57,7 +56,7 @@ body{
     border-radius: 10px;
     color: white;
     font-size: 27px;
-    font-family: pioret one, cursive;
+    font-family:cursive;
     margin-right: 36px;
     margin-left: 63px;
     background: -webkit-linear-gradient(top,#ffb8b8,#3c2804);

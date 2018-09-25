@@ -1,5 +1,5 @@
 body#welcome{
-    background-image: url(images/pizza.jpeg);
+    background-image: url("../images/pizza.jpeg");
     width:  100%;
     background-size:cover;
     height: fit-content;
@@ -10,14 +10,13 @@ body#welcome{
     font-weight: 900;
     border-radius: 37px;
     padding: 10px;
-    font-family: Kristen ITC;
+    font-family: cursive;
     background-color: #04040487;
     margin-top: 32%;
     margin-bottom: 179px;
 }       
 #get_started{
     width: fit-content;
-    height:;
     margin-left: 10px;
     font-size: 30px;
     font-weight:  bold;

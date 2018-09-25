@@ -3,7 +3,7 @@ html, body{
 	width: 100%;
 	padding: 0px;
 	margin: 0px;
-	background-image: url(images/hotdog.jpg);
+	background-image: url(../images/hotdog.jpg);
 	background-size: cover;
 	background-attachment: fixed;
 }
@@ -18,7 +18,7 @@ html, body{
 }
 #landing_note{
      color: white;
-	font-family: vivaldi;
+	font-family:cursive;
 	display:  block;
 	font-size: 45px;
 	font-weight: bolder;
@@ -32,7 +32,7 @@ button{
 	background: -webkit-linear-gradient(top,red,orange);
 	border: 0px;
 	width: 65%;
-	font-family: vivaldi;
+	font-family: cursive;
 	margin-bottom: 5px;
 	font-size: 31px;
 	color: white;

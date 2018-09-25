@@ -5,13 +5,13 @@
 	margin-bottom: 2px;
 }
 #top_header{
-	font-family: Vivaldi;
+	font-family:cursive;
 	font-size: 45px;
 }
 
 #menu.tabcontent{
-    background-image: url("images/pizza.jpeg");
-    background-position: fixed;
+	background-color: black;
+	background-position: fixed;
 	background-size: cover;
 	}
 
