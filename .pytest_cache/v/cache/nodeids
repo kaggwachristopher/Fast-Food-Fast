@@ -1,9 +1,0 @@
-[
-  "test.py::Testing::test_all_orders_getter",
-  "test.py::Testing::test_invalid_status_id",
-  "test.py::Testing::test_invalid_update",
-  "test.py::Testing::test_order_updater",
-  "test.py::Testing::test_place_order",
-  "test.py::Testing::test_single_order_getter",
-  "test.py::Testing::test_unavailable_fetch"
-]
