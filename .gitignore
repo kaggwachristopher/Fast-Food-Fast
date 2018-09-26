@@ -1,5 +1,4 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
 *.py[cod]
 *$py.class
 
@@ -10,6 +9,7 @@ __pycache__/
 .Python
 .idea/
 build/
+__pycache__/
 develop-eggs/
 dist/
 downloads/

@@ -38,7 +38,7 @@ class Testing(unittest.TestCase):
             "status_id": "any none integer"
         }
         self.update6 = {
-            "status_id": ""
+            "status_id": "       "
         }
 
     def test_place_order(self):
@@ -47,7 +47,7 @@ class Testing(unittest.TestCase):
         self.assertEqual(result.status_code, 201)
 
     def test_all_orders_getter(self):
-        result = self.client().get('/api/v1/orders/3')
+        result = self.client().get('/api/v1/orders')
         self.assertEqual(result.status_code, 200)
 
     def test_single_order_getter(self):
