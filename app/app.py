@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, request, json
 from app.models import RecipeOrders
-# from instance.config import DevelopmentConfig
 
 app = Flask(__name__)
 recipe = RecipeOrders()
@@ -13,7 +12,7 @@ def home():
 
 @app.route('/api/v1/orders', methods=['POST'])
 def place_an_order():
-    return (recipe.place_order())
+    return recipe.place_order()
 
 
 @app.route('/api/v1/orders', methods=['GET'])
