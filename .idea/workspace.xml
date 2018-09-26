@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f483f774-a3f1-41d1-b6e8-386ed8c9952d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,14 +39,14 @@
         <counts>
           <entry key="gitignore" value="25" />
           <entry key="md" value="2778" />
-          <entry key="py" value="782" />
+          <entry key="py" value="822" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Markdown" value="2778" />
           <entry key="PLAIN_TEXT" value="25" />
-          <entry key="Python" value="782" />
+          <entry key="Python" value="822" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -58,8 +57,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="34" lean-forward="true" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+            <state relative-caret-position="164">
+              <caret line="36" column="38" lean-forward="true" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -67,13 +66,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="49" column="50" lean-forward="true" selection-start-line="49" selection-start-column="50" selection-end-line="49" selection-end-column="50" />
+            <state relative-caret-position="188">
+              <caret line="77" column="52" lean-forward="true" selection-start-line="77" selection-start-column="52" selection-end-line="77" selection-end-column="52" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
+                <marker date="1538005566073" expanded="true" signature="2484:2489" ph="..." />
               </folding>
             </state>
           </provider>
@@ -83,12 +83,12 @@
         <entry file="file://$PROJECT_DIR$/app/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="20" column="6" lean-forward="true" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+              <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
@@ -131,11 +131,11 @@
       <list>
         <option value="$PROJECT_DIR$/UI/README.md" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/app/models.py" />
         <option value="$PROJECT_DIR$/app/.gitignore" />
         <option value="$PROJECT_DIR$/app/app.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/app/models.py" />
       </list>
     </option>
   </component>
@@ -189,7 +189,49 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.pytest for test.Testing.test_all_orders_getter">
+  <component name="RunManager" selected="Python tests.pytest for test.Testing">
+    <configuration name="models" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Fast-Food-Fast" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/models.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="run" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Fast-Food-Fast" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="pytest for test.Testing" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="Fast-Food-Fast" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -220,7 +262,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test.Testing.test_empty_status_id" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test.Testing.test_make_an_order_pending" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="Fast-Food-Fast" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -231,54 +273,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test.Testing.test_empty_status_id&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for test.Testing.test_invalid_status_id" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="Fast-Food-Fast" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test.Testing.test_invalid_status_id&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for test.Testing.test_non_integer_status_id" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="Fast-Food-Fast" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test.Testing.test_non_integer_status_id&quot;" />
+      <option name="_new_target" value="&quot;test.Testing.test_make_an_order_pending&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python tests.pytest for test.Testing.test_invalid_status_id" />
       <item itemvalue="Python tests.pytest for test.Testing" />
-      <item itemvalue="Python tests.pytest for test.Testing.test_non_integer_status_id" />
-      <item itemvalue="Python tests.pytest for test.Testing.test_empty_status_id" />
       <item itemvalue="Python tests.pytest for test.Testing.test_all_orders_getter" />
+      <item itemvalue="Python.models" />
+      <item itemvalue="Python tests.pytest for test.Testing.test_make_an_order_pending" />
+      <item itemvalue="Python.run" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.pytest for test.Testing.test_all_orders_getter" />
-        <item itemvalue="Python tests.pytest for test.Testing.test_empty_status_id" />
         <item itemvalue="Python tests.pytest for test.Testing" />
-        <item itemvalue="Python tests.pytest for test.Testing.test_non_integer_status_id" />
-        <item itemvalue="Python tests.pytest for test.Testing.test_invalid_status_id" />
+        <item itemvalue="Python.run" />
+        <item itemvalue="Python tests.pytest for test.Testing.test_all_orders_getter" />
+        <item itemvalue="Python tests.pytest for test.Testing.test_make_an_order_pending" />
+        <item itemvalue="Python.models" />
       </list>
     </recent_temporary>
   </component>
@@ -296,35 +308,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest_for_test_Testing - 2018.09.27 at 00h 43m 18s.xml">
-      <configuration name="pytest for test.Testing" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_Testing - 2018.09.27 at 01h 32m 42s.xml">
-      <configuration name="pytest for test.Testing" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_Testing_test_invalid_status_id - 2018.09.27 at 01h 35m 23s.xml">
-      <configuration name="pytest for test.Testing.test_invalid_status_id" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_Testing - 2018.09.27 at 01h 42m 06s.xml">
-      <configuration name="pytest for test.Testing" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_Testing_test_non_integer_status_id - 2018.09.27 at 01h 47m 31s.xml">
-      <configuration name="pytest for test.Testing.test_non_integer_status_id" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_Testing_test_empty_status_id - 2018.09.27 at 01h 51m 28s.xml">
-      <configuration name="pytest for test.Testing.test_empty_status_id" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_Testing - 2018.09.27 at 01h 51m 56s.xml">
-      <configuration name="pytest for test.Testing" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_Testing_test_empty_status_id - 2018.09.27 at 02h 09m 20s.xml">
-      <configuration name="pytest for test.Testing.test_empty_status_id" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_Testing_test_empty_status_id - 2018.09.27 at 02h 10m 17s.xml">
-      <configuration name="pytest for test.Testing.test_empty_status_id" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_Testing_test_all_orders_getter - 2018.09.27 at 02h 12m 38s.xml">
+    <history-entry file="pytest_for_test_Testing_test_all_orders_getter - 2018.09.27 at 02h 40m 46s.xml">
       <configuration name="pytest for test.Testing.test_all_orders_getter" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_Testing_test_make_an_order_pending - 2018.09.27 at 02h 40m 59s.xml">
+      <configuration name="pytest for test.Testing.test_make_an_order_pending" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_Testing - 2018.09.27 at 02h 41m 17s.xml">
+      <configuration name="pytest for test.Testing" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_Testing_test_all_orders_getter - 2018.09.27 at 02h 42m 47s.xml">
+      <configuration name="pytest for test.Testing.test_all_orders_getter" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_Testing - 2018.09.27 at 02h 43m 22s.xml">
+      <configuration name="pytest for test.Testing" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_Testing_test_all_orders_getter - 2018.09.27 at 02h 44m 04s.xml">
+      <configuration name="pytest for test.Testing.test_all_orders_getter" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_Testing - 2018.09.27 at 02h 44m 17s.xml">
+      <configuration name="pytest for test.Testing" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_Testing - 2018.09.27 at 02h 46m 11s.xml">
+      <configuration name="pytest for test.Testing" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_Testing - 2018.09.27 at 02h 47m 33s.xml">
+      <configuration name="pytest for test.Testing" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_Testing - 2018.09.27 at 02h 48m 31s.xml">
+      <configuration name="pytest for test.Testing" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -336,14 +348,14 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.80683625" visible="true" weight="0.2128637" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.80604136" visible="true" weight="0.2633997" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.7289348" weight="0.0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920508" weight="0.32924962" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.19316375" side_tool="true" visible="true" weight="0.2128637" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.19395867" side_tool="true" visible="true" weight="0.2633997" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -352,17 +364,6 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/test.py</url>
-          <line>100</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/UI/README.md">
@@ -398,13 +399,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -415,27 +409,35 @@
     <entry file="file://$PROJECT_DIR$/app/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="20" column="6" lean-forward="true" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="77" column="52" lean-forward="true" selection-start-line="77" selection-start-column="52" selection-end-line="77" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <marker date="1538005566073" expanded="true" signature="2484:2489" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="34" lean-forward="true" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+        <state relative-caret-position="164">
+          <caret line="36" column="38" lean-forward="true" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
+    <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="49" column="50" lean-forward="true" selection-start-line="49" selection-start-column="50" selection-end-line="49" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>

@@ -46,10 +46,6 @@ class Testing(unittest.TestCase):
                                     data=json.dumps(self.order))
         self.assertEqual(result.status_code, 201)
 
-    def test_all_orders_getter(self):
-        result = self.client().get('/api/v1/orders')
-        self.assertEqual(result.status_code, 200)
-
     def test_single_order_getter(self):
         result = self.client().get('/api/v1/orders/3')
         self.assertEqual(result.status_code, 200)
@@ -77,6 +73,11 @@ class Testing(unittest.TestCase):
                                    data=json.dumps(self.update3))
         self.assertEqual(result.status_code, 201)
         self.assertIsNotNone(result)
+
+    def test_all_orders_getter(self):
+        result = self.client().get('/api/v1/orders')
+        self.assertIsNotNone(result)
+        self.assertEqual(result.status_code, 200)
 
     def test_unavailable_fetch(self):
         result1 = self.client().get('/api/v1/orders/222')

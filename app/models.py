@@ -34,8 +34,7 @@ class RecipeOrders:
     def get_all_orders(self):
         # This if statement checks whether the list contains dummy data then it empties the list
         if len(self.all_orders_list) == 1:
-            self.all_orders_list = []
-            return jsonify({'orders': self.all_orders_list}), 200
+            return jsonify({'orders': []}), 200
         else:
             return jsonify({'orders': self.all_orders_list}), 200
 
