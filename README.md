@@ -1,7 +1,7 @@
 # Fast-Food-Fast
 
 Fast-Food-Fast is a food delivery application for a restaurant which enables users to order for food and admin users to handle and manage the different orders.
-
+Link to the live site: https://kaggwachristopher.github.io/Fast-Food-Fast/
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -26,6 +26,8 @@ Note:Older browser like internet explorer may work but not recommended
 
 * **Christopher Kaggwa** 
 
+### Deployment
+The user interface is hosted on github pages follow this [link](https://kaggwachristopher.github.io/Fast-Food-Fast/) to view the site 
 
 ## Acknowledgments
 
