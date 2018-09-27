@@ -1,19 +1,13 @@
 from flask import Flask, jsonify, request, json
 from app.models import RecipeOrders
-# from instance.config import DevelopmentConfig
 
 app = Flask(__name__)
 recipe = RecipeOrders()
 
 
-@app.route('/', methods=['GET'])
-def home():
-    return jsonify({'message': 'API endpoint, type /api/v1/orders to get all orders'})
-
-
 @app.route('/api/v1/orders', methods=['POST'])
 def place_an_order():
-    return (recipe.place_order())
+    return recipe.place_order()
 
 
 @app.route('/api/v1/orders', methods=['GET'])

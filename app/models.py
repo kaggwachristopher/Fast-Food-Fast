@@ -32,7 +32,11 @@ class RecipeOrders:
         return jsonify({'order': new_order}), 201
 
     def get_all_orders(self):
-        return jsonify({'orders': self.all_orders_list}), 200
+        # This if statement checks whether the list contains dummy data then it empties the list
+        if len(self.all_orders_list) == 1:
+            return jsonify({'orders': []}), 200
+        else:
+            return jsonify({'orders': self.all_orders_list}), 200
 
     def get_single_order(self,order_id):
         for order in self.all_orders_list:
@@ -46,11 +50,11 @@ class RecipeOrders:
         status_id = data['status_id']
 
         if type(status_id) != int:
-            return jsonify({'error': 'order status has to be a number'}), 403
+            return jsonify({'error': 'order status has to be a number'}), 400
         else:
             pass
         if str(status_id).strip() == "":
-            return jsonify({'error': 'status_id cannot be empty'}), 403
+            return jsonify({'error': 'status_id cannot be empty'}), 400
         for order in self.all_orders_list:
             if str(order['order_id']) == str(order_id):
                 if status_id == 0:
@@ -74,6 +78,6 @@ class RecipeOrders:
                 # when the status_id is 3,the order status is changed to Completed
 
                 else:
-                    return jsonify({'message': 'invalid status_id entry'}), 403
+                    return jsonify({'message': 'invalid status_id entry'}), 400
 
         return jsonify({'Not found': 'invalid order id'}), 404

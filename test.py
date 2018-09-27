@@ -1,6 +1,9 @@
 import unittest
 from app.app import app
 from flask import json
+from app.models import RecipeOrders
+
+tester = RecipeOrders()
 
 
 class Testing(unittest.TestCase):
@@ -17,45 +20,86 @@ class Testing(unittest.TestCase):
             "user_id": "21"
         }
         self.update = {
-            "status_id": 2
+            "status_id": 0
         }
         self.update1 = {
-            "status_id": 7
+            "status_id": 1
+        }
+        self.update2 = {
+            "status_id": 2
+        }
+        self.update3 = {
+            "status_id": 3
+        }
+        self.update4 = {
+            "status_id": 6543454
+        }
+        self.update5 = {
+            "status_id": "any none integer"
+        }
+        self.update6 = {
+            "status_id": "       "
         }
 
-    def tearDown(self):
-        pass
-
-    def test_all_orders_getter(self):
-        result = self.client().get('/api/v1/orders')
-        self.assertEqual(result.status_code, 200)
+    def test_place_order(self):
+        result = self.client().post('/api/v1/orders', content_type='application/json',
+                                    data=json.dumps(self.order))
+        self.assertEqual(result.status_code, 201)
 
     def test_single_order_getter(self):
         result = self.client().get('/api/v1/orders/3')
+        self.assertEqual(result.status_code, 200)
+
+    def test_accept_order(self):
+        result = self.client().put('/api/v1/orders/3', content_type='application/json',
+                                   data=json.dumps(self.update2))
+        self.assertEqual(result.status_code, 201)
+        self.assertIsNotNone(result)
+
+    def test_decline_order(self):
+        result = self.client().put('/api/v1/orders/3', content_type='application/json',
+                                   data=json.dumps(self.update))
+        self.assertEqual(result.status_code, 201)
+        self.assertIsNotNone(result)
+
+    def test_make_an_order_pending(self):
+        result = self.client().put('/api/v1/orders/3', content_type='application/json',
+                                   data=json.dumps(self.update1))
+        self.assertEqual(result.status_code, 201)
+        self.assertIsNotNone(result)
+
+    def test_complete_order(self):
+        result = self.client().put('/api/v1/orders/3', content_type='application/json',
+                                   data=json.dumps(self.update3))
+        self.assertEqual(result.status_code, 201)
+        self.assertIsNotNone(result)
+
+    def test_all_orders_getter(self):
+        result = self.client().get('/api/v1/orders')
+        self.assertIsNotNone(result)
         self.assertEqual(result.status_code, 200)
 
     def test_unavailable_fetch(self):
         result1 = self.client().get('/api/v1/orders/222')
         self.assertEqual(result1.status_code, 404)
 
-    def test_order_updater(self):
-        result = self.client().put('/api/v1/orders/3', content_type='application/json',
-                                   data=json.dumps(self.update))
-        self.assertEqual(result.status_code, 201)
-        self.assertIsNotNone(result)
-
     def test_invalid_update(self):
-        result = self.client().put('/api/v1/orders/4', content_type='application/json',
+        result = self.client().put('/api/v1/orders/344444', content_type='application/json',
                                    data=json.dumps(self.update))
         self.assertEqual(result.status_code, 404)
         self.assertIsNotNone(result)
 
-    def test_invalid_status_id(self):
+    def test_invalid_integer_status_id(self):
         result = self.client().put('/api/v1/orders/3', content_type='application/json',
-                                   data=json.dumps(self.update1))
-        self.assertEqual(result.status_code, 403)
+                                   data=json.dumps(self.update4))
+        self.assertEqual(result.status_code, 400)
 
-    def test_place_order(self):
-        result = self.client().post('/api/v1/orders', content_type='application/json',
-                                    data=json.dumps(self.order))
-        self.assertEqual(result.status_code, 201)
+    def test_non_integer_status_id(self):
+        result = self.client().put('/api/v1/orders/3', content_type='application/json',
+                                   data=json.dumps(self.update5))
+        self.assertEqual(result.status_code, 400)
+
+    def test_empty_status_id(self):
+        result = self.client().put('/api/v1/orders/3', content_type='application/json',
+                                   data=json.dumps(self.update6))
+        self.assertEqual(result.status_code, 400)
