@@ -51,14 +51,14 @@ class RecipeOrders:
         if type(status_id) != int:
             if str(status_id)=="0":
                 pass
-            return jsonify({'Bad request': 'order status has to be a number from 0-3'}), 400
+            return jsonify({'Bad request': 'order status has to be a number from 1-4'}), 400
         else:
             pass
         if str(status_id).strip() == "":
             return jsonify({'error': 'status_id cannot be empty'}), 400
         for order in self.all_orders_list:
             if str(order['order_id']) == str(order_id):
-                if str(status_id) == "0":
+                if status_id == 4:
                     order['order_status'] = "Declined"
                     return jsonify({'status updated': order}), 201
                 # when the status_id is zero,the order status is changed to declined
@@ -100,7 +100,7 @@ class RecipeOrders:
             return jsonify({'missing field': 'input must contain a the name of the food you want'}), 400
         elif type(food_name) != str:
                 return jsonify({'error':'the food_name should be a string'}), 400
-        elif food_name.strip()=="":
+        elif food_name.strip() == "":
             return jsonify({'error': 'the food_name field cant be empty'}), 400
 
         if not user_id:
