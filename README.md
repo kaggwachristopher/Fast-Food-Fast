@@ -64,6 +64,11 @@ An API development environment forexample postman and insomnia
 
 ```$ Pytest```
 
+* To run the tests with coverage navigate to the root directory and run this code in your terminal
+
+pytest test.py --cov=app --cov-report term-missing
+
+
 ###### Automated tests
 The tests are automated and can be seen on travis CI. Use this [link](https://travis-ci.org/kaggwachristopher/Fast-Food-Fast) to have a look at the automated tests 
 
