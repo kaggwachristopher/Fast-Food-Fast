@@ -9,3 +9,4 @@ script:
   - coveralls
 after_success:
   - coveralls
+pytest test.py --cov=app --cov-report term-missing
