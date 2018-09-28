@@ -63,22 +63,22 @@ An API development environment forexample postman and insomnia
 pass in such json data inorder to post an order
 ```
 {
-  "user_id":"21",
-  "recipe_id":"4",
-  "quantity":"5"
+  "user_id":21,
+  "food_name":"chips",
+  "quantity":5
 }
 ```
 
 pass in such json data inorder to update the status of an order an order
 ```
 {
-  "status_id":"1"
+  "status_id": 1
 }
 
-status_id=0 declines an order
 status_id=1 puts an order on pending
 status_id=2 accepts an order
 status_id=3 completes an order
+status_id=4 declines an order
 
 ```
 
