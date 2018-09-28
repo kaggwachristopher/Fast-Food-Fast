@@ -48,9 +48,8 @@ class RecipeOrders:
     def update_order_status(self, order_id):
         data = request.get_json()
         status_id = data['status_id']
-
         if type(status_id) != int:
-            return jsonify({'error': 'order status has to be a number'}), 400
+            return jsonify({'Bad request': 'order status has to be a number from 0-3'}), 400
         else:
             pass
         if str(status_id).strip() == "":
