@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5e07e858943a454b90a8e40d9f8c2a6e)](https://app.codacy.com/app/kaggwachristopher/Fast-Food-Fast?utm_source=github.com&utm_medium=referral&utm_content=kaggwachristopher/Fast-Food-Fast&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/kaggwachristopher/Fast-Food-Fast.svg?branch=api)](https://travis-ci.org/kaggwachristopher/Fast-Food-Fast)[![Coverage Status](https://coveralls.io/repos/github/kaggwachristopher/Fast-Food-Fast/badge.svg?branch=api)](https://coveralls.io/github/kaggwachristopher/Fast-Food-Fast?branch=api)[![Test Coverage](https://api.codeclimate.com/v1/badges/7e866f55b4e3f8e28a17/test_coverage)](https://codeclimate.com/github/kaggwachristopher/Fast-Food-Fast/test_coverage)[![Maintainability](https://api.codeclimate.com/v1/badges/7e866f55b4e3f8e28a17/maintainability)](https://codeclimate.com/github/kaggwachristopher/Fast-Food-Fast/maintainability)
 
 # Fast-Food-Fast
