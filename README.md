@@ -58,6 +58,30 @@ An API development environment forexample postman and insomnia
 |`/api/v1/orders/<order_id>` |GET|Fetch a specific order with this order_id|
 |`/api/v1/orders/<order_id>` |PUT |Update the status of an order with this order_id |
 
+#### Working with the api
+
+pass in such json data inorder to post an order
+```
+{
+  "user_id":"21",
+  "recipe_id":"4",
+  "quantity":"5"
+}
+```
+
+pass in such json data inorder to update the status of an order an order
+```
+{
+  "status_id":"1"
+}
+
+status_id=0 declines an order
+status_id=1 puts an order on pending
+status_id=2 accepts an order
+status_id=3 completes an order
+
+```
+
 ## Running the tests
 
 * Since you now have pytest installed you just need to open your terminal and navigate into the project directory
