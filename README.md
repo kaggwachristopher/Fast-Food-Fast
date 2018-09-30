@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5e07e858943a454b90a8e40d9f8c2a6e)](https://app.codacy.com/app/kaggwachristopher/Fast-Food-Fast?utm_source=github.com&utm_medium=referral&utm_content=kaggwachristopher/Fast-Food-Fast&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/kaggwachristopher/Fast-Food-Fast.svg?branch=api)](https://travis-ci.org/kaggwachristopher/Fast-Food-Fast)[![Coverage Status](https://coveralls.io/repos/github/kaggwachristopher/Fast-Food-Fast/badge.svg?branch=api)](https://coveralls.io/github/kaggwachristopher/Fast-Food-Fast?branch=api)[![Test Coverage](https://api.codeclimate.com/v1/badges/7e866f55b4e3f8e28a17/test_coverage)](https://codeclimate.com/github/kaggwachristopher/Fast-Food-Fast/test_coverage)[![Maintainability](https://api.codeclimate.com/v1/badges/7e866f55b4e3f8e28a17/maintainability)](https://codeclimate.com/github/kaggwachristopher/Fast-Food-Fast/maintainability)
 
 # Fast-Food-Fast
@@ -56,6 +57,30 @@ An API development environment forexample postman and insomnia
 |`/api/v1/orders` |POST |Add an order|
 |`/api/v1/orders/<order_id>` |GET|Fetch a specific order with this order_id|
 |`/api/v1/orders/<order_id>` |PUT |Update the status of an order with this order_id |
+
+#### Working with the api
+
+pass in such json data inorder to post an order
+```
+{
+  "user_id":21,
+  "food_name":"chips",
+  "quantity":5
+}
+```
+
+pass in such json data inorder to update the status of an order an order
+```
+{
+  "status_id": 1
+}
+
+status_id=1 puts an order on pending
+status_id=2 accepts an order
+status_id=3 completes an order
+status_id=4 declines an order
+
+```
 
 ## Running the tests
 
