@@ -1,4 +1,4 @@
-from flask import jsonify, request,json
+from flask import jsonify, request, json
 import datetime
 
 
@@ -13,23 +13,7 @@ class RecipeOrders:
             "food_name": "plain chips",
             "user_id": 21
         }]
-
-    def place_order(self):
-        data = request.get_json()
-        user_id = data['user_id']
-        food_name = data['food_name']
-        quantity = data['quantity']
-        order_id = len(self.all_orders_list) + 1
-        new_order = {
-            "user_id": user_id,
-            "quantity": quantity,
-            "food_name": food_name,
-            "order_id": order_id,
-            "order_status": "Pending",
-            "order_date": str(datetime.datetime.now())
-        }
-        self.all_orders_list.append(new_order)
-        return jsonify({'order': new_order}), 201
+        self.menu = []
 
     def get_all_orders(self):
         # This if statement checks whether the list contains dummy data then it empties the list
@@ -43,13 +27,12 @@ class RecipeOrders:
             if str(order['order_id']) == str(order_id):
                 return jsonify(order), 200
         return jsonify({'error': 'Order does not exist not'}), 404
-        pass
 
     def update_order_status(self, order_id):
         data = request.get_json()
         status_id = data['status_id']
         if type(status_id) != int:
-            if str(status_id)=="0":
+            if str(status_id) == "0":
                 pass
             return jsonify({'Bad request': 'order status has to be a number from 1-4'}), 400
         else:
@@ -83,33 +66,217 @@ class RecipeOrders:
 
         return jsonify({'Not found': 'invalid order id'}), 404
 
-    def invalid_order(self):
-
+    def add_meal(self):
         data = request.get_json()
-        user_id = data.get('user_id')
+        food_name = data.get('food_name')
+        price = data.get('price')
+        item_number = len(self.menu) + 1
+        new_item = {
+            "food": food_name,
+            "item_number": item_number,
+            "price": price
+        }
+        self.menu.append(new_item)
+        return jsonify({'new_menu_item': new_item}), 201
+
+    def get_menu(self):
+        return jsonify({"Today's menu": self.menu}), 200
+
+    def invalid_order(self):
+        data = request.get_json()
         food_name = data.get('food_name')
         quantity = data.get('quantity')
 
         if not quantity:
             return jsonify({'missing field': 'input must contain the food quantity'}), 400
-
         elif type(quantity) != int:
             return jsonify({'error': 'the quantity should be a number'}), 400
 
         if not food_name:
             return jsonify({'missing field': 'input must contain a the name of the food you want'}), 400
-        elif type(food_name) != str:
+        if type(food_name) != str:
                 return jsonify({'error':'the food_name should be a string'}), 400
         elif food_name.strip() == "":
             return jsonify({'error': 'the food_name field cant be empty'}), 400
-
-        if not user_id:
-            return jsonify({'missing field': 'input must contain a user_id'}), 400
-        elif type(user_id) != int or not user_id:
-            return jsonify({'error': 'the user_id should be a number'}), 400
 
     def invalid_update(self):
         data = request.get_json()
         status_id = data.get('status_id')
         if not status_id:
-            return jsonify({'missing field':'you must put a status_id field'})
+            return jsonify({'missing field':'you must put a status_id field'}), 400
+
+    def invalid_meal(self):
+        data = request.get_json()
+        food_name = data.get('food_name')
+        price = data.get('price')
+        if not food_name:
+            if food_name == "":
+                pass
+            else:
+                return jsonify({'missing field': 'input must contain a food_name'}), 400
+        if type(food_name) != str:
+            return jsonify({'error': 'the food_name should be a string'}), 400
+        elif food_name.strip() == "" or food_name == "":
+            return jsonify({'error': 'the food_name field cant be empty'}), 400
+
+        if not price:
+            if price == 0:
+                pass
+            else:
+                return jsonify({'missing field': 'input must contain a price'}), 400
+        if type(price) != int:
+            return jsonify({'error': 'the price should be an integer'}), 400
+        elif price == 0:
+            return jsonify({'error': 'the price field cant be Zero'}), 400
+
+
+class Users(RecipeOrders):
+
+    def __init__(self):
+        self.all_users_list = []
+        self.logged_in_user = ""
+        self.login_status = False
+        self.logged_in_user_details = dict()
+
+    def get_users(self):
+        return jsonify({'all users': self.all_users_list}), 200
+
+    def create_user(self):
+        data = request.get_json()
+        # only for those to signup as admins
+        admin_key = data.get('admin_key')
+        first_name = data.get('first_name')
+        last_name = data.get('last_name')
+        address = data.get('address')
+        residence = data.get('residence')
+        contact = data.get('contact')
+        email = data.get('email')
+        password = data.get('password')
+        if admin_key == 99001122:
+            account_type = "admin"
+        else:
+            account_type = "customer"
+
+        new_user = {
+            "user_id": len(self.all_users_list) + 1,
+            "first_name": first_name,
+            "account_type": account_type,
+            "last_name": last_name,
+            "address": address,
+            "residence": residence,
+            "contact": contact,
+            "email": email,
+            "password": password
+        }
+
+        self.all_users_list.append(new_user)
+        return jsonify({'signup successful your user id is': new_user['user_id']}), 201
+
+    def get_user_history(self):
+        history_list = []
+        for order in RecipeOrders().all_orders_list:
+            if order['user_id'] == self.logged_in_user_details['user_id']:
+                history_list.append(order)
+
+        return jsonify({'your order history': history_list}), 200
+
+    def user_login(self):
+        data = request.get_json()
+        email_or_contact = data.get('email/contact')
+        password = data.get('password')
+        for user in self.all_users_list:
+            if (user['email'] == email_or_contact or user['contact'] == email_or_contact) and user['password'] == password:
+                self.logged_in_user = user['account_type']
+                self.logged_in_user_details = user
+                self.login_status = True
+                return jsonify({'success': 'logged in'}), 200
+            else:
+                return jsonify({'login failed': 'check your password, email, or phone'}), 401
+        return jsonify({'Login failure': 'users list is empty, please signup!!'}), 400
+
+    def invalid_login(self):
+        data = request.get_json()
+        email_or_contact = data.get('email/contact')
+        password = data.get('password')
+        if not email_or_contact:
+            if email_or_contact != "":
+                return jsonify({'missing field': 'you have to include your email or contact'}), 400
+        elif not password:
+            if password != "":
+                return jsonify({'missing field': 'you have to include your password'}), 400
+
+    def invalid_signup(self):
+        data = request.get_json()
+        first_name = data.get('first_name')
+        last_name = data.get('last_name')
+        address = data.get('address')
+        residence = data.get('residence')
+        contact = data.get('contact')
+        email = data.get('email')
+        password = data.get('password')
+        confirm_password = data.get('confirm_password')
+
+
+        # checks that all fields are included in json data and are not blank
+        if not first_name or first_name.strip() == "":
+                return jsonify({'missing field' : 'you have to include your first name and it shouldnt be blank'}), 400
+        elif not last_name or last_name.strip() == "":
+            return jsonify({'missing field' : 'you have to include your last name and it shouldnt be blank'}), 400
+        elif not email or last_name.strip() == "":
+            return jsonify({'missing field' : 'you have to include your email and it shouldnt be blank'}), 400
+        elif not residence or residence.strip() == "" :
+            return jsonify({'missing field' : 'you have to include your area of residence and it shouldnt be blank'}), 400
+        elif not address or address.strip() == "":
+            return jsonify({'missing field' : 'you have to include your address and it shouldnt be blank'}), 400
+        elif not contact or contact.strip() == "":
+            return jsonify({'missing field' : 'you have to include your contact and it shouldnt be blank'}), 400
+        elif not password or password.strip() == "":
+            return jsonify({'missing field' : 'you have to include your password and it shouldnt be blank'}), 400
+        elif not confirm_password or confirm_password.strip() == "":
+            return jsonify({'missing field' : 'you have to include your password confirmaton and it shouldnt be blank'}), 400
+
+        # password validation
+        if len(json.dumps(password)) < 6:
+            return jsonify({'invalid password': 'password should bear atleast 6 characters'}), 411
+        if str(password) != str(confirm_password):
+            return jsonify({'error': 'passwords do not match'})
+
+        # check whether email or phone already exists
+        for user in self.all_users_list:
+            if user['email'] == email:
+                return jsonify({'Signup failure': 'This email belongs to another account'})
+            if user['contact'] == contact:
+                return jsonify({'Signup failure': 'This contact is already used'})
+
+        # checks whether field data is in the right data types
+        if type(first_name) != str or type(last_name) != str or type(address) != str or type(contact) != str or type(password) != str or type(confirm_password) != str or type(email) != str:
+            return jsonify({'type error': 'all inputs must be strings'}), 400
+
+
+    def place_order(self):
+        data = request.get_json()
+        user_id = self.logged_in_user_details['user_id']
+        food_name = data['food_name']
+        full_name = self.logged_in_user_details['first_name'] + " " + self.logged_in_user_details['last_name']
+        quantity = data['quantity']
+        order_id = len(RecipeOrders().all_orders_list) + 1
+        new_order = {
+            "user_id": user_id,
+            "full name": full_name,
+            "quantity": quantity,
+            "food_name": food_name,
+            "order_id": order_id,
+            "order_status": "Pending",
+            "order_date": str(datetime.datetime.now())
+        }
+        RecipeOrders().all_orders_list.append(new_order)
+        return jsonify({'order': new_order}), 201
+
+    def not_logged_in(self):
+        if not self.login_status:
+            return jsonify({'Login required': 'Please login to your account and then try again'})
+
+    def not_admin(self):
+        if self.logged_in_user != "admin":
+            return jsonify({'Unauthorized': 'only admin users can have access to this information'})
+

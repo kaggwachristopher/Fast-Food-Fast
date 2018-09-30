@@ -103,3 +103,29 @@ class Testing(unittest.TestCase):
         result = self.client().put('/api/v1/orders/3', content_type='application/json',
                                    data=json.dumps(self.update6))
         self.assertEqual(result.status_code, 400)
+
+    def test_menu_getter(self):
+        result = self.client().get('/api/v1/menu')
+        self.assertEqual(result.status_code, 200)
+
+    def test_users_getter(self):
+        result = self.client().get('/api/v1/users')
+        self.assertEqual(result.status_code, 200)
+
+
+    def test_signup(self):
+
+        result = self.client().post('/api/v1/auth/signup', content_type='application/json',
+                                   data=json.dumps({
+            "first_name": "w ",
+            "last_name": " w",
+            "address": "j ",
+            "residence": "5678",
+            "contact": "mmm",
+            "email": "bbb",
+            "password": "mmmmmm",
+            "confirm_password": "mmmmmm",
+            "admin_key": 99001122
+        }))
+        self.assertEqual(result.status_code, 201)
+        self.assertIsNotNone(result)
