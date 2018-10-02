@@ -189,7 +189,7 @@ class Users(RecipeOrders):
                 self.logged_in_user = user['account_type']
                 self.logged_in_user_details = user
                 self.login_status = True
-                return jsonify({'success': 'logged in'}), 200
+                return jsonify({'success': 'logged in'}), 201
             else:
                 return jsonify({'login failed': 'check your password, email, or phone'}), 401
         return jsonify({'Login failure': 'users list is empty, please signup!!'}), 400
