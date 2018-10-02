@@ -38,7 +38,7 @@ class RecipeOrders:
         else:
             return jsonify({'orders': self.all_orders_list}), 200
 
-    def get_single_order(self,order_id):
+    def get_single_order(self, order_id):
         for order in self.all_orders_list:
             if str(order['order_id']) == str(order_id):
                 return jsonify(order), 200
