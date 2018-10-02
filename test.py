@@ -130,7 +130,6 @@ class Testing(unittest.TestCase):
         result = self.client().get('/api/v1/users')
         self.assertEqual(result.status_code, 200)
 
-
     def test_signup(self):
 
         result = self.client().post('/api/v1/auth/signup', content_type='application/json',
@@ -148,3 +147,12 @@ class Testing(unittest.TestCase):
         self.assertEqual(result.status_code, 201)
         self.assertIsNotNone(result)
 
+    def test_login(self):
+
+        result = self.client().post('/api/v1/auth/login', content_type='application/json',
+                           data=json.dumps({
+                               "email/contact": "bbb",
+                               "password": "mmmmmm"}))
+
+        self.assertEqual(result.status_code, 201)
+        self.assertIsNotNone(result)
