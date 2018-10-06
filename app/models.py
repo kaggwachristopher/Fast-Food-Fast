@@ -30,10 +30,23 @@ class RecipeOrders(Database):
             "food_name": "plain chips",
             "user_id": 21
         }]
+        # get orders from database
+        fetch_orders = """
+                               SELECT * FROM orders;
+                               """
+        self.cursor.execute(fetch_orders)
+        orders_tuples = self.cursor.fetchall()
+        for order in orders_tuples:
+            order_dictionary = dict(order_id=order[0], user_id=order[1], full_user_name=order[2], food_name=order[3], quantity=order[4],
+                                    order_status=order[5], order_date=order[6], order_price=order[7])
+            self.all_orders_list.append(order_dictionary)
+
+        # get menu items from database
         self.menu = []
 
     def get_all_orders(self):
         # This if statement checks whether the list contains dummy data then it empties the list
+
         if len(self.all_orders_list) == 1:
             return jsonify({'orders': []}), 200
         else:
@@ -59,22 +72,38 @@ class RecipeOrders(Database):
         for order in self.all_orders_list:
             if str(order['order_id']) == str(order_id):
                 if status_id == 4:
-                    order['order_status'] = "Declined"
+                    order_status =order['order_status'] = "Declined"
+                    update_order_status = """
+                                            update orders set order_status = '{}' where order_id = '{}'
+                                               """.format(order_status, order_id)
+                    self.cursor.execute(update_order_status)
                     return jsonify({'status updated': order}), 201
-                # when the status_id is zero,the order status is changed to declined
+                # when the status_id is four ,the order status is changed to declined
 
                 elif status_id == 1:
-                    order['order_status'] = "Pending"
+                    order_status =order['order_status'] = "Pending"
+                    update_order_status = """
+                                               update orders set order_status = '{}' where order_id = '{}'
+                                                  """.format(order_status, order_id)
+                    self.cursor.execute(update_order_status)
                     return jsonify({'status updated': order}), 201
                 # when the status_id is 1,the order status is changed to pending
 
                 elif status_id == 2:
-                    order['order_status'] = "Accepted"
+                    order_status =order['order_status'] = "Accepted"
+                    update_order_status = """
+                                               update orders set order_status = '{}' where order_id = '{}'
+                                                  """.format(order_status, order_id)
+                    self.cursor.execute(update_order_status)
                     return jsonify({'status updated': order}), 201
                 # when the status_id is 2,the order status is changed to Accepted
 
                 elif status_id == 3:
-                    order['order_status'] = "Completed"
+                    order_status=order['order_status'] = "Completed"
+                    update_order_status = """
+                                               update orders set order_status = '{}' where order_id = '{}'
+                                                  """.format(order_status, order_id)
+                    self.cursor.execute(update_order_status)
                     return jsonify({'status updated': order}), 201
                 # when the status_id is 3,the order status is changed to Completed
 
@@ -87,16 +116,22 @@ class RecipeOrders(Database):
         data = request.get_json()
         food_name = data.get('food_name')
         price = data.get('price')
-        item_number = len(self.menu) + 1
-        new_item = {
-            "food": food_name,
-            "item_number": item_number,
-            "price": price
-        }
-        self.menu.append(new_item)
-        return jsonify({'new_menu_item': new_item}), 201
+        insert_data = """
+                        INSERT INTO menu (food_name, price) 
+                        VALUES ('{}', '{}');
+                        """.format(food_name, price)
+        self.cursor.execute(insert_data)
+        return jsonify({'success': 'new menu item created and added to menu'}), 201
 
     def get_menu(self):
+        fetch_items = """
+                         SELECT * FROM menu;
+                    """
+        self.cursor.execute(fetch_items)
+        meals_tuples = self.cursor.fetchall()
+        for item in meals_tuples:
+            meals_dictionary = dict(item_number=item[0], food_name=item[1], price=item[2])
+            self.menu.append(meals_dictionary)
         return jsonify({"Today's menu": self.menu}), 200
 
     def invalid_order(self):
@@ -147,40 +182,20 @@ class RecipeOrders(Database):
             return jsonify({'error': 'the price field cant be Zero'}), 400
 
 
-class Users(RecipeOrders,Database):
+class Users(RecipeOrders, Database):
 
     def __init__(self):
         super().__init__()
-        fetch_emails = """
-        SELECT email FROM users;
-        """
-        self.cursor.execute(fetch_emails)
-        fetched_emails = self.cursor.fetchall()
         self.all_users_list = []
-        self.user_emails = []
-        for email in fetched_emails:
-            self.user_emails.append(email[0])
-
-        fetch_contacts = """
-                SELECT contact FROM users;
-                """
-        self.cursor.execute(fetch_contacts)
-        fetched_contacts = self.cursor.fetchall()
-        self.user_contacts=[]
-        for contact in fetched_contacts:
-            self.user_contacts.append(contact[0])
-
         self.logged_in_user = ""
         self.login_status = False
         self.logged_in_user_details = dict()
-
         fetch_users = """
                 SELECT * FROM users;
                 """
         self.cursor.execute(fetch_users)
-        users = self.cursor.fetchall()
-        print(users)
-        for user in users:
+        users_tuples = self.cursor.fetchall()
+        for user in users_tuples:
             user_dict = dict(user_id=user[0], first_name=user[1], last_name=user[2], account_type=user[3],
                              contact=user[4], email=user[5], residence=user[6], address=user[7], password=user[8],
                              creation_date=user[9])
@@ -189,11 +204,13 @@ class Users(RecipeOrders,Database):
         self.logged_in_user = ""
         self.login_status = False
         self.logged_in_user_details = dict()
+        print(self.logged_in_user_details)
 
 
     def get_users(self):
         return jsonify({'all users': self.all_users_list}), 200
 
+    @property
     def create_user(self):
         data = request.get_json()
         # only for those to signup as admins
@@ -216,14 +233,9 @@ class Users(RecipeOrders,Database):
         insert_user_command = """
                 INSERT INTO users (first_name, last_name,contact,account_type, email,password,residence,address, creation_date) 
                 VALUES ('{}', '{}','{}','{}','{}','{}','{}','{}','{}');
-                """.format(first_name, last_name,contact,account_type, email, password, residence,address, creation_date)
+                """.format(first_name, last_name, contact, account_type, email, password, residence, address, creation_date)
         self.cursor.execute(insert_user_command)
-        id_fetch = """
-                select user_id from users where email='{}'
-                """.format(email)
-        execution = self.cursor.execute(id_fetch)
-        fetched_id = self.cursor.fetchone()
-        return jsonify({'signup successful your user id is':'you may now login'}), 201
+        return jsonify({'signup successful': 'you may now login with your credentials'}), 201
 
     def get_user_history(self):
         history_list = []
@@ -296,10 +308,11 @@ class Users(RecipeOrders,Database):
             return jsonify({'error': 'passwords do not match'})
 
         # check whether email or phone already exists
-        if str(email) in self.user_emails:
-            return jsonify({'Signup failure': 'This email belongs to another account'})
-        if str(contact) in self.user_contacts:
-            return jsonify({'Signup failure': 'This contact is already used'})
+        for user in self.all_users_list:
+            if user['email'] == email:
+                return jsonify({'Signup failure': 'This email belongs to another account'})
+            if user['contact'] == contact:
+                return jsonify({'Signup failure': 'This contact is already used'})
 
         # checks whether field data is in the right data types
         if type(first_name) != str or type(last_name) != str or type(address) != str or type(contact) != str or type(password) != str or type(confirm_password) != str or type(email) != str:
@@ -309,21 +322,18 @@ class Users(RecipeOrders,Database):
     def place_order(self):
         data = request.get_json()
         user_id = self.logged_in_user_details['user_id']
-        food_name = data['food_name']
-        full_name = self.logged_in_user_details['first_name'] + " " + self.logged_in_user_details['last_name']
-        quantity = data['quantity']
-        order_id = len(RecipeOrders().all_orders_list) + 1
-        new_order = {
-            "user_id": user_id,
-            "full name": full_name,
-            "quantity": quantity,
-            "food_name": food_name,
-            "order_id": order_id,
-            "order_status": "Pending",
-            "order_date": str(datetime.datetime.now())
-        }
-        RecipeOrders().all_orders_list.append(new_order)
-        return jsonify({'order': new_order}), 201
+        food_name = data.get('food_name')
+        full_user_name = self.logged_in_user_details['first_name'] + " " + self.logged_in_user_details['last_name']
+        quantity = data.get('quantity')
+        order_status = "pending"
+        order_price = 678
+        order_date = str(str(datetime.date.today())+str(datetime.datetime.now().hour)+":"+str(datetime.datetime.now().minute))
+        insert_data = """
+                INSERT INTO orders (user_id, full_user_name, food_name, quantity, order_status, order_date, order_price) 
+                VALUES ('{}', '{}','{}','{}','{}','{}','{}');
+                """.format(user_id, full_user_name, food_name, quantity, order_status, order_date, order_price)
+        self.cursor.execute(insert_data)
+        return jsonify({'success': 'order has been placed and is pending verification'}), 201
 
     def not_logged_in(self):
         if not self.login_status:

@@ -78,7 +78,7 @@ def create_new_user():
     if user.invalid_signup():
         return user.invalid_signup()
     else:
-        return user.create_user()
+        return user.create_user
 
 
 @app.route('/api/v1/auth/login', methods=['POST'])
