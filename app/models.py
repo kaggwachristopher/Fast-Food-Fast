@@ -1,10 +1,27 @@
 from flask import jsonify, request, json
 import datetime
+import psycopg2
 
 
-class RecipeOrders:
+class Database:
+    def __init__(self):
+        connection_credentials = """
+        dbname='fast_food' user='postgres' password='idontgiveadamnwhatyouthink'
+         host='localhost' port='5432'
+         """
+        try:
+            self.connection = psycopg2.connect(connection_credentials)
+            self.connection.autocommit = True
+            self.cursor = self.connection.cursor()
+            print('\n\nConnected to Database')
+        except:
+            print("\n\n Failed to connect to db")
+
+
+class RecipeOrders(Database):
 
     def __init__(self):
+        super().__init__()
         self.all_orders_list = [{
             "order_date": "2018-09-22 02:36:27.956913",
             "order_id": 3,
@@ -130,13 +147,49 @@ class RecipeOrders:
             return jsonify({'error': 'the price field cant be Zero'}), 400
 
 
-class Users(RecipeOrders):
+class Users(RecipeOrders,Database):
 
     def __init__(self):
+        super().__init__()
+        fetch_emails = """
+        SELECT email FROM users;
+        """
+        self.cursor.execute(fetch_emails)
+        fetched_emails = self.cursor.fetchall()
         self.all_users_list = []
+        self.user_emails = []
+        for email in fetched_emails:
+            self.user_emails.append(email[0])
+
+        fetch_contacts = """
+                SELECT contact FROM users;
+                """
+        self.cursor.execute(fetch_contacts)
+        fetched_contacts = self.cursor.fetchall()
+        self.user_contacts=[]
+        for contact in fetched_contacts:
+            self.user_contacts.append(contact[0])
+
         self.logged_in_user = ""
         self.login_status = False
         self.logged_in_user_details = dict()
+
+        fetch_users = """
+                SELECT * FROM users;
+                """
+        self.cursor.execute(fetch_users)
+        users = self.cursor.fetchall()
+        print(users)
+        for user in users:
+            user_dict = dict(user_id=user[0], first_name=user[1], last_name=user[2], account_type=user[3],
+                             contact=user[4], email=user[5], residence=user[6], address=user[7], password=user[8],
+                             creation_date=user[9])
+            self.all_users_list.append(user_dict)
+
+        self.logged_in_user = ""
+        self.login_status = False
+        self.logged_in_user_details = dict()
+
 
     def get_users(self):
         return jsonify({'all users': self.all_users_list}), 200
@@ -152,25 +205,25 @@ class Users(RecipeOrders):
         contact = data.get('contact')
         email = data.get('email')
         password = data.get('password')
+        creation_date = str(str(datetime.date.today())+str(datetime.datetime.now().hour)+":"+str(datetime.datetime.now().minute))
         if admin_key == 99001122:
             account_type = "admin"
         else:
             account_type = "customer"
 
-        new_user = {
-            "user_id": len(self.all_users_list) + 1,
-            "first_name": first_name,
-            "account_type": account_type,
-            "last_name": last_name,
-            "address": address,
-            "residence": residence,
-            "contact": contact,
-            "email": email,
-            "password": password
-        }
 
-        self.all_users_list.append(new_user)
-        return jsonify({'signup successful your user id is': new_user['user_id']}), 201
+        # self.all_users_list.append(new_user)
+        insert_user_command = """
+                INSERT INTO users (first_name, last_name,contact,account_type, email,password,residence,address, creation_date) 
+                VALUES ('{}', '{}','{}','{}','{}','{}','{}','{}','{}');
+                """.format(first_name, last_name,contact,account_type, email, password, residence,address, creation_date)
+        self.cursor.execute(insert_user_command)
+        id_fetch = """
+                select user_id from users where email='{}'
+                """.format(email)
+        execution = self.cursor.execute(id_fetch)
+        fetched_id = self.cursor.fetchone()
+        return jsonify({'signup successful your user id is':'you may now login'}), 201
 
     def get_user_history(self):
         history_list = []
@@ -184,6 +237,7 @@ class Users(RecipeOrders):
         data = request.get_json()
         email_or_contact = data.get('email/contact')
         password = data.get('password')
+
         for user in self.all_users_list:
             if (user['email'] == email_or_contact or user['contact'] == email_or_contact) and user['password'] == password:
                 self.logged_in_user = user['account_type']
@@ -242,11 +296,10 @@ class Users(RecipeOrders):
             return jsonify({'error': 'passwords do not match'})
 
         # check whether email or phone already exists
-        for user in self.all_users_list:
-            if user['email'] == email:
-                return jsonify({'Signup failure': 'This email belongs to another account'})
-            if user['contact'] == contact:
-                return jsonify({'Signup failure': 'This contact is already used'})
+        if str(email) in self.user_emails:
+            return jsonify({'Signup failure': 'This email belongs to another account'})
+        if str(contact) in self.user_contacts:
+            return jsonify({'Signup failure': 'This contact is already used'})
 
         # checks whether field data is in the right data types
         if type(first_name) != str or type(last_name) != str or type(address) != str or type(contact) != str or type(password) != str or type(confirm_password) != str or type(email) != str:
