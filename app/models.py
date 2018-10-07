@@ -1,4 +1,5 @@
 from flask import jsonify, request, json
+from flask_bcrypt import Bcrypt
 import datetime
 import psycopg2
 
@@ -13,9 +14,9 @@ class Database:
             self.connection = psycopg2.connect(connection_credentials)
             self.connection.autocommit = True
             self.cursor = self.connection.cursor()
-            print('\n\nConnected to Database')
+            # print('\n\nConnected to Database')
         except:
-            print("\n\n Failed to connect to db")
+            print("Database connection failed")
 
 
 class RecipeOrders(Database):
@@ -132,7 +133,6 @@ class RecipeOrders(Database):
 
     def invalid_order(self):
         self.__init__()
-        print(self.menu)
         data = request.get_json()
         item_number = data.get('item_number')
         quantity = data.get('quantity')
@@ -147,7 +147,6 @@ class RecipeOrders(Database):
         if type(item_number) != int:
                 return jsonify({'error': 'the food_name should be a string'}), 400
         for item in self.menu:
-            print(self.menu)
             if str(item['item_number']) == str(item_number):
                 return None
             else:
@@ -181,7 +180,6 @@ class RecipeOrders(Database):
 
 
 class Users(RecipeOrders, Database):
-
     def __init__(self):
         super().__init__()
         self.all_users_list = []
@@ -202,8 +200,6 @@ class Users(RecipeOrders, Database):
         self.logged_in_user = ""
         self.login_status = False
         self.logged_in_user_details = dict()
-        print(self.logged_in_user_details)
-
 
     def get_users(self):
         self.__init__()
@@ -211,6 +207,7 @@ class Users(RecipeOrders, Database):
 
     @property
     def create_user(self):
+        bcrypt = Bcrypt()
         data = request.get_json()
         # only for those to signup as admins
         admin_key = data.get('admin_key')
@@ -221,6 +218,7 @@ class Users(RecipeOrders, Database):
         contact = data.get('contact')
         email = data.get('email')
         password = data.get('password')
+        encrypted_password = bcrypt.generate_password_hash(password).decode('utf-8')
         creation_date = str(str(datetime.date.today())+str(datetime.datetime.now().hour)+":"+str(datetime.datetime.now().minute))
         if admin_key == 99001122:
             account_type = "admin"
@@ -231,7 +229,7 @@ class Users(RecipeOrders, Database):
         insert_user_command = """
                 INSERT INTO users (first_name, last_name,contact,account_type, email,password,residence,address, creation_date) 
                 VALUES ('{}', '{}','{}','{}','{}','{}','{}','{}','{}');
-                """.format(first_name, last_name, contact, account_type, email, password, residence, address, creation_date)
+                """.format(first_name, last_name, contact, account_type, email, encrypted_password, residence, address, creation_date)
         self.cursor.execute(insert_user_command)
         return jsonify({'signup successful': 'you may now login with your credentials'}), 201
 
@@ -244,18 +242,21 @@ class Users(RecipeOrders, Database):
         return jsonify({'your order history': history_list}), 200
 
     def user_login(self):
+        bcrypt = Bcrypt()
         data = request.get_json()
         email_or_contact = data.get('email/contact')
         password = data.get('password')
 
         for user in self.all_users_list:
-            if (user['email'] == email_or_contact or user['contact'] == email_or_contact) and user['password'] == password:
-                self.logged_in_user = user['account_type']
-                self.logged_in_user_details = user
-                self.login_status = True
-                return jsonify({'success': 'logged in'}), 201
-            else:
-                return jsonify({'login failed': 'check your password, email, or phone'}), 401
+            if user['email'] == email_or_contact or user['contact'] == email_or_contact:
+
+                if (bcrypt.check_password_hash(user['password'], str(password))) is True:
+                    self.logged_in_user = user['account_type']
+                    self.logged_in_user_details = user
+                    self.login_status = True
+                    return jsonify({'success': 'logged in'}), 201
+                else:
+                    return jsonify({'login failed': 'your credentials do not match any account'}), 401
         return jsonify({'Login failure': 'users list is empty, please signup!!'}), 400
 
     def invalid_login(self):
@@ -279,7 +280,6 @@ class Users(RecipeOrders, Database):
         email = data.get('email')
         password = data.get('password')
         confirm_password = data.get('confirm_password')
-
 
         # checks that all fields are included in json data and are not blank
         if not first_name or first_name.strip() == "":
@@ -316,9 +316,7 @@ class Users(RecipeOrders, Database):
         if type(first_name) != str or type(last_name) != str or type(address) != str or type(contact) != str or type(password) != str or type(confirm_password) != str or type(email) != str:
             return jsonify({'type error': 'all inputs must be strings'}), 400
 
-
     def place_order(self):
-
         data = request.get_json()
         user_id = self.logged_in_user_details['user_id']
         item_number = data.get('item_number')
@@ -343,9 +341,9 @@ class Users(RecipeOrders, Database):
     def not_logged_in(self):
         """ this method checks if the login_status of a user is false and then returns a json message """
         if not self.login_status:
-            return jsonify({'Login required': 'Please login to your account and then try again'})
+            return jsonify({'Login required': 'Please login to your account and then try again'}), 401
 
     def not_admin(self):
         if self.logged_in_user != "admin":
-            return jsonify({'Unauthorized': 'only admin users can have access to this information'})
+            return jsonify({'Unauthorized': 'only admin users can have access to this information'}), 401
 
