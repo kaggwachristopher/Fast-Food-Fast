@@ -138,8 +138,8 @@ class Testing(unittest.TestCase):
             "last_name": " w",
             "address": "j ",
             "residence": "56788",
-            "contact": "mmmm",
-            "email": "bbbb",
+            "contact": "mmmjjjdhjcfhchcgcjcm",
+            "email": "bbbjchchcycdhcgkcjb",
             "password": "mmmmmmm",
             "confirm_password": "mmmmmmm",
             "admin_key": 99001122

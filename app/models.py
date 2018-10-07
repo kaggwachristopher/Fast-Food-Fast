@@ -34,6 +34,16 @@ class RecipeOrders(Database):
         fetch_orders = """
                                SELECT * FROM orders;
                                """
+        # fetch menu
+        self.menu = []
+        fetch_items = """
+                         SELECT * FROM menu;
+                    """
+        self.cursor.execute(fetch_items)
+        meals_tuples = self.cursor.fetchall()
+        for item in meals_tuples:
+            meals_dictionary = dict(item_number=item[0], food_name=item[1], price=item[2])
+            self.menu.append(meals_dictionary)
         self.cursor.execute(fetch_orders)
         orders_tuples = self.cursor.fetchall()
         for order in orders_tuples:
@@ -41,16 +51,9 @@ class RecipeOrders(Database):
                                     order_status=order[5], order_date=order[6], order_price=order[7])
             self.all_orders_list.append(order_dictionary)
 
-        # get menu items from database
-        self.menu = []
-
     def get_all_orders(self):
-        # This if statement checks whether the list contains dummy data then it empties the list
-
-        if len(self.all_orders_list) == 1:
-            return jsonify({'orders': []}), 200
-        else:
-            return jsonify({'orders': self.all_orders_list}), 200
+        self.__init__()
+        return jsonify({'orders': self.all_orders_list}), 200
 
     def get_single_order(self, order_id):
         for order in self.all_orders_list:
@@ -99,7 +102,7 @@ class RecipeOrders(Database):
                 # when the status_id is 2,the order status is changed to Accepted
 
                 elif status_id == 3:
-                    order_status=order['order_status'] = "Completed"
+                    order_status = order['order_status'] = "Completed"
                     update_order_status = """
                                                update orders set order_status = '{}' where order_id = '{}'
                                                   """.format(order_status, order_id)
@@ -124,19 +127,14 @@ class RecipeOrders(Database):
         return jsonify({'success': 'new menu item created and added to menu'}), 201
 
     def get_menu(self):
-        fetch_items = """
-                         SELECT * FROM menu;
-                    """
-        self.cursor.execute(fetch_items)
-        meals_tuples = self.cursor.fetchall()
-        for item in meals_tuples:
-            meals_dictionary = dict(item_number=item[0], food_name=item[1], price=item[2])
-            self.menu.append(meals_dictionary)
+        self.__init__()
         return jsonify({"Today's menu": self.menu}), 200
 
     def invalid_order(self):
+        self.__init__()
+        print(self.menu)
         data = request.get_json()
-        food_name = data.get('food_name')
+        item_number = data.get('item_number')
         quantity = data.get('quantity')
 
         if not quantity:
@@ -144,12 +142,17 @@ class RecipeOrders(Database):
         elif type(quantity) != int:
             return jsonify({'error': 'the quantity should be a number'}), 400
 
-        if not food_name:
-            return jsonify({'missing field': 'input must contain a the name of the food you want'}), 400
-        if type(food_name) != str:
-                return jsonify({'error':'the food_name should be a string'}), 400
-        elif food_name.strip() == "":
-            return jsonify({'error': 'the food_name field cant be empty'}), 400
+        if not item_number:
+            return jsonify({'missing field': 'input must contain a the item_number on the menu corresponding with the food you want'}), 400
+        if type(item_number) != int:
+                return jsonify({'error': 'the food_name should be a string'}), 400
+        for item in self.menu:
+            print(self.menu)
+            if str(item['item_number']) == str(item_number):
+                return None
+            else:
+                continue
+        return jsonify({'invalid order': 'item does not exist on menu'}), 404
 
     def invalid_update(self):
         data = request.get_json()
@@ -161,11 +164,6 @@ class RecipeOrders(Database):
         data = request.get_json()
         food_name = data.get('food_name')
         price = data.get('price')
-        if not food_name:
-            if food_name == "":
-                pass
-            else:
-                return jsonify({'missing field': 'input must contain a food_name'}), 400
         if type(food_name) != str:
             return jsonify({'error': 'the food_name should be a string'}), 400
         elif food_name.strip() == "" or food_name == "":
@@ -208,6 +206,7 @@ class Users(RecipeOrders, Database):
 
 
     def get_users(self):
+        self.__init__()
         return jsonify({'all users': self.all_users_list}), 200
 
     @property
@@ -227,7 +226,6 @@ class Users(RecipeOrders, Database):
             account_type = "admin"
         else:
             account_type = "customer"
-
 
         # self.all_users_list.append(new_user)
         insert_user_command = """
@@ -320,14 +318,21 @@ class Users(RecipeOrders, Database):
 
 
     def place_order(self):
+
         data = request.get_json()
         user_id = self.logged_in_user_details['user_id']
-        food_name = data.get('food_name')
+        item_number = data.get('item_number')
         full_user_name = self.logged_in_user_details['first_name'] + " " + self.logged_in_user_details['last_name']
         quantity = data.get('quantity')
         order_status = "pending"
-        order_price = 678
         order_date = str(str(datetime.date.today())+str(datetime.datetime.now().hour)+":"+str(datetime.datetime.now().minute))
+        fetch_items = """
+                         SELECT * FROM menu where item_number = '{}';
+                    """.format(item_number)
+        self.cursor.execute(fetch_items)
+        ordered_meal = self.cursor.fetchone()
+        food_name = ordered_meal[1]
+        order_price = quantity*ordered_meal[2]
         insert_data = """
                 INSERT INTO orders (user_id, full_user_name, food_name, quantity, order_status, order_date, order_price) 
                 VALUES ('{}', '{}','{}','{}','{}','{}','{}');
@@ -336,6 +341,7 @@ class Users(RecipeOrders, Database):
         return jsonify({'success': 'order has been placed and is pending verification'}), 201
 
     def not_logged_in(self):
+        """ this method checks if the login_status of a user is false and then returns a json message """
         if not self.login_status:
             return jsonify({'Login required': 'Please login to your account and then try again'})
 
