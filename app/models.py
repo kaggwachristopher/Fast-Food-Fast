@@ -205,7 +205,6 @@ class Users(RecipeOrders, Database):
         self.__init__()
         return jsonify({'all users': self.all_users_list}), 200
 
-    @property
     def create_user(self):
         bcrypt = Bcrypt()
         data = request.get_json()
